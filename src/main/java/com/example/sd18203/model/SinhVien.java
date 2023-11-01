@@ -1,0 +1,28 @@
+package com.example.sd18203.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class SinhVien {
+
+    private String id;
+
+    private String ten;
+
+    private String diaChi;
+
+    private String gioiTinh;
+
+    private String lop;
+
+    private String chieuCao;
+
+    private String canNang;
+
+}
