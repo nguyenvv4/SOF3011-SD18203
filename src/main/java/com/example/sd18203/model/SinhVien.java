@@ -25,4 +25,11 @@ public class SinhVien {
 
     private String canNang;
 
+    public SinhVien(String id, String ten, String diaChi, String gioiTinh, String lop) {
+        this.id = id;
+        this.ten = ten;
+        this.diaChi = diaChi;
+        this.gioiTinh = gioiTinh;
+        this.lop = lop;
+    }
 }
