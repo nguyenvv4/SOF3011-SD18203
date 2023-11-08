@@ -10,18 +10,52 @@ import java.util.ArrayList;
 
 @WebServlet(name = "SinhVienServlet", value = {
         "/sinh-vien/hien-thi",
+        "/sinh-vien/detail"
 })
 public class SinhVienServlet extends HttpServlet {
+    ArrayList<SinhVien> listSinhVien = new ArrayList<>();
+    ArrayList<String> lop = new ArrayList<>();
+
+    public SinhVienServlet() {
+        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
+        listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi", "Nu", "SD12347"));
+        listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi", "Nam", "SD12348"));
+        lop.add("SD12345");
+        lop.add("SD12346");
+        lop.add("SD12347");
+        lop.add("SD12348");
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ArrayList<SinhVien> listSinhVien = new ArrayList<>();
-        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi","Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi","Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi","Nam", "SD12345"));
+        String uri = request.getRequestURI();
+        System.out.println(uri);
+        if (uri.contains("/hien-thi")) {
+            getList(request, response);
+        } else if (uri.contains("/detail")) {
+            detail(request, response);
+        }
+    }
 
+    private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getParameter("id");
+        SinhVien sinhVienDetail = new SinhVien();
+        for (SinhVien sinhVien : listSinhVien) {
+            if (sinhVien.getId().equals(id)) {
+                sinhVienDetail = sinhVien;
+            }
+        }
+        System.out.println(sinhVienDetail.toString());
+        request.setAttribute("sinhVien", sinhVienDetail);
+        request.setAttribute("lop", lop);
+        request.getRequestDispatcher("/detail.jsp").forward(request, response);
+    }
+
+    public void getList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("listSinhVien", listSinhVien);
+        request.setAttribute("lop", lop);
         request.getRequestDispatcher("/hien-thi-sinh-vien.jsp").forward(request, response);
     }
 
