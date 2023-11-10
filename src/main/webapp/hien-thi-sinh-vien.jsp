@@ -16,31 +16,31 @@
 </head>
 <body>
 
-<form>
+<form action="/sinh-vien/add" method="post">
     <div class="mb-3">
         <label class="form-label">ID</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="id">
     </div>
     <div class="mb-3">
         <label class="form-label">Ho Ten</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="hoTen">
     </div>
     <div class="mb-3">
         <label class="form-label">Địa chỉ</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" name="diaChi">
     </div>
     <div class="mb-3">
         <label class="form-label">Giới tính</label>
         <br>
-        <input type="radio" id="contactChoice1" name="contact" value="Nam" />
+        <input type="radio" id="contactChoice1" name="gioiTinh" value="Nam" />
         <label for="contactChoice1">Nam</label>
 
-        <input type="radio" id="contactChoice2" name="contact" value="Nu" />
+        <input type="radio" id="contactChoice2" name="gioiTinh" value="Nu" />
         <label for="contactChoice2">Nu</label>
     </div>
     <div class="mb-3">
         <label for="disabledSelect" class="form-label">Lớp</label>
-        <select id="disabledSelect" class="form-select">
+        <select id="disabledSelect" class="form-select" name="lop">
             <c:forEach var="i" items="${lop}">
                 <option value="${i}">${i}</option>
             </c:forEach>

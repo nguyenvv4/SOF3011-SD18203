@@ -9,8 +9,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet(name = "SinhVienServlet", value = {
-        "/sinh-vien/hien-thi",
-        "/sinh-vien/detail"
+        "/sinh-vien/hien-thi", // GET
+        "/sinh-vien/detail", // GET
+        "/sinh-vien/add", //POST
 })
 public class SinhVienServlet extends HttpServlet {
     ArrayList<SinhVien> listSinhVien = new ArrayList<>();
@@ -61,6 +62,21 @@ public class SinhVienServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String uri = request.getRequestURI();
+        if (uri.contains("/add")) {
+            this.addNew(request, response);
+        }
 
+    }
+
+    private void addNew(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String id = request.getParameter("id");
+        String hoTen = request.getParameter("hoTen");
+        String diachi = request.getParameter("diaChi");
+        String gioiTinh = request.getParameter("gioiTinh");
+        String lop = request.getParameter("lop");
+        SinhVien sinhVien = new SinhVien(id, hoTen, diachi, gioiTinh, lop);
+        listSinhVien.add(sinhVien);
+        response.sendRedirect("/sinh-vien/hien-thi");
     }
 }
