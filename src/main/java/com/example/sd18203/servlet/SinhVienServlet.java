@@ -77,26 +77,29 @@ public class SinhVienServlet extends HttpServlet {
         if (uri.contains("/add")) {
             this.addNew(request, response);
         } else if (uri.contains("/update")) {
-
-            String id = request.getParameter("id");
-            String hoTen = request.getParameter("hoTen");
-            String diachi = request.getParameter("diaChi");
-            String gioiTinh = request.getParameter("gioiTinh");
-            String lop = request.getParameter("lop");
-
-            for (SinhVien sv : listSinhVien) {
-                if (sv.getId().equals(id)) {
-                    sv.setTen(hoTen);
-                    sv.setLop(lop);
-                    sv.setDiaChi(diachi);
-                    sv.setGioiTinh(gioiTinh);
-                }
-            }
-            response.sendRedirect("/sinh-vien/hien-thi");
-
+            this.update(request, response);
         }
 
     }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String id = request.getParameter("id");
+        String hoTen = request.getParameter("hoTen");
+        String diachi = request.getParameter("diaChi");
+        String gioiTinh = request.getParameter("gioiTinh");
+        String lop = request.getParameter("lop");
+
+        for (SinhVien sv : listSinhVien) {
+            if (sv.getId().equals(id)) {
+                sv.setTen(hoTen);
+                sv.setLop(lop);
+                sv.setDiaChi(diachi);
+                sv.setGioiTinh(gioiTinh);
+            }
+        }
+        response.sendRedirect("/sinh-vien/hien-thi");
+    }
+
 
     private void addNew(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("id");
