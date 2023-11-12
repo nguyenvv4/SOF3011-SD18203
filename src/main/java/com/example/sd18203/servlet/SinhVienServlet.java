@@ -12,6 +12,8 @@ import java.util.ArrayList;
         "/sinh-vien/hien-thi", // GET
         "/sinh-vien/detail", // GET
         "/sinh-vien/add", //POST
+        "/sinh-vien/delete", //GET
+        "/sinh-vien/update",
 })
 public class SinhVienServlet extends HttpServlet {
     ArrayList<SinhVien> listSinhVien = new ArrayList<>();
@@ -37,7 +39,16 @@ public class SinhVienServlet extends HttpServlet {
             getList(request, response);
         } else if (uri.contains("/detail")) {
             detail(request, response);
+        } else if (uri.contains("/delete")) {
+            this.delete(request, response);
         }
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int vitri = Integer.parseInt(request.getParameter("vitri"));
+        listSinhVien.remove(vitri);
+        response.sendRedirect("/sinh-vien/hien-thi");
+
     }
 
     private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -65,6 +76,24 @@ public class SinhVienServlet extends HttpServlet {
         String uri = request.getRequestURI();
         if (uri.contains("/add")) {
             this.addNew(request, response);
+        } else if (uri.contains("/update")) {
+
+            String id = request.getParameter("id");
+            String hoTen = request.getParameter("hoTen");
+            String diachi = request.getParameter("diaChi");
+            String gioiTinh = request.getParameter("gioiTinh");
+            String lop = request.getParameter("lop");
+
+            for (SinhVien sv : listSinhVien) {
+                if (sv.getId().equals(id)) {
+                    sv.setTen(hoTen);
+                    sv.setLop(lop);
+                    sv.setDiaChi(diachi);
+                    sv.setGioiTinh(gioiTinh);
+                }
+            }
+            response.sendRedirect("/sinh-vien/hien-thi");
+
         }
 
     }
