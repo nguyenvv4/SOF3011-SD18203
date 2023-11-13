@@ -14,6 +14,7 @@ import java.util.ArrayList;
         "/sinh-vien/add", //POST
         "/sinh-vien/delete", //GET
         "/sinh-vien/update",
+        "/sinh-vien/search", //GET
 })
 public class SinhVienServlet extends HttpServlet {
     ArrayList<SinhVien> listSinhVien = new ArrayList<>();
@@ -24,6 +25,21 @@ public class SinhVienServlet extends HttpServlet {
         listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
         listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi", "Nu", "SD12347"));
         listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi", "Nam", "SD12348"));
+        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
+        listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi", "Nu", "SD12347"));
+        listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi", "Nam", "SD12348"));
+
+        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
+        listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi", "Nu", "SD12347"));
+        listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi", "Nam", "SD12348"));
+
+        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", "SD12345"));
+        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
+        listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi", "Nu", "SD12347"));
+        listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi", "Nam", "SD12348"));
+
         lop.add("SD12345");
         lop.add("SD12346");
         lop.add("SD12347");
@@ -41,7 +57,23 @@ public class SinhVienServlet extends HttpServlet {
             detail(request, response);
         } else if (uri.contains("/delete")) {
             this.delete(request, response);
+        }else if (uri.contains("/search")){
+            this.search(request,response);
         }
+    }
+
+    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ArrayList<SinhVien> list = new ArrayList<>();
+        String name = request.getParameter("hoTen");
+        System.out.println(name);
+        for(SinhVien sinhVien : listSinhVien){
+            if (sinhVien.getTen().contains(name)){
+                list.add(sinhVien);
+            }
+        }
+        request.setAttribute("listSinhVien", list);
+        request.setAttribute("lop", lop);
+        request.getRequestDispatcher("/hien-thi-sinh-vien.jsp").forward(request, response);
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {

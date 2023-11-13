@@ -14,7 +14,7 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
-<body>
+<body class="container">
 
 <form action="/sinh-vien/add" method="post">
     <div class="mb-3">
@@ -32,10 +32,10 @@
     <div class="mb-3">
         <label class="form-label">Giới tính</label>
         <br>
-        <input type="radio" id="contactChoice1" name="gioiTinh" value="Nam" />
+        <input type="radio" id="contactChoice1" name="gioiTinh" value="Nam"/>
         <label for="contactChoice1">Nam</label>
 
-        <input type="radio" id="contactChoice2" name="gioiTinh" value="Nu" />
+        <input type="radio" id="contactChoice2" name="gioiTinh" value="Nu"/>
         <label for="contactChoice2">Nu</label>
     </div>
     <div class="mb-3">
@@ -50,6 +50,16 @@
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<p>chuc nang tìm kiem theo ten</p>
+<form action="/sinh-vien/search">
+    <div class="mb-3">
+        <label class="form-label">Ho Ten</label>
+        <input type="text" class="form-control" name="hoTen">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+
 <table class="table">
     <thead>
     <tr>
@@ -78,5 +88,21 @@
     </c:forEach>
     </tbody>
 </table>
+
+<div class="row">
+    <c:forEach var="i" items="${listSinhVien}" varStatus="sinhVien">
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <a href="/w3images/lights.jpg">
+                    <img src="https://product.hstatic.net/1000253775/product/img_3433_cf9125ba244c4c219762906a5b8f6ab5_grande.jpg"
+                         alt="Lights" style="width:100%">
+                    <div class="caption">
+                        <p>${i.ten}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </c:forEach>
+</div>
 </body>
 </html>
