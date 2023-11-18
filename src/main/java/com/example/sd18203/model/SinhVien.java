@@ -1,5 +1,6 @@
 package com.example.sd18203.model;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,29 +10,40 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "Students")
+@Entity
 public class SinhVien {
 
+    @Id
+    @Column(name = "id")
     private String id;
 
+    @Column(name = "ten")
     private String ten;
 
+    @Column(name = "diaChi")
     private String diaChi;
 
+    @Column(name = "gioiTinh")
     private String gioiTinh;
 
-    private String lop;
+    @ManyToOne
+    @JoinColumn(name = "lop")
+    private Lop lop;
 
+    @Column(name = "chieuCao")
     private String chieuCao;
 
+    @Column(name = "canNang")
     private String canNang;
 
-    public SinhVien(String id, String ten, String diaChi, String gioiTinh, String lop) {
-        this.id = id;
-        this.ten = ten;
-        this.diaChi = diaChi;
-        this.gioiTinh = gioiTinh;
-        this.lop = lop;
-    }
+//    public SinhVien(String id, String ten, String diaChi, String gioiTinh, Integer lop) {
+//        this.id = id;
+//        this.ten = ten;
+//        this.diaChi = diaChi;
+//        this.gioiTinh = gioiTinh;
+//        this.lop = lop;
+//    }
 
     @Override
     public String toString() {

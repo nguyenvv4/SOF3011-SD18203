@@ -21,24 +21,9 @@ public class SinhVienServlet extends HttpServlet {
     ArrayList<String> lop = new ArrayList<>();
 
     public SinhVienServlet() {
-        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
-        listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi", "Nu", "SD12347"));
-        listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi", "Nam", "SD12348"));
-        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
-        listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi", "Nu", "SD12347"));
-        listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi", "Nam", "SD12348"));
+//        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", 1));
+//        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
 
-        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
-        listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi", "Nu", "SD12347"));
-        listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi", "Nam", "SD12348"));
-
-        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", "SD12345"));
-        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
-        listSinhVien.add(new SinhVien("S3", "Nguyen Van c", "Ha Noi", "Nu", "SD12347"));
-        listSinhVien.add(new SinhVien("S4", "Nguyen Van d", "Ha Noi", "Nam", "SD12348"));
 
         lop.add("SD12345");
         lop.add("SD12346");
@@ -124,7 +109,7 @@ public class SinhVienServlet extends HttpServlet {
         for (SinhVien sv : listSinhVien) {
             if (sv.getId().equals(id)) {
                 sv.setTen(hoTen);
-                sv.setLop(lop);
+//                sv.setLop(lop);
                 sv.setDiaChi(diachi);
                 sv.setGioiTinh(gioiTinh);
             }
@@ -139,8 +124,8 @@ public class SinhVienServlet extends HttpServlet {
         String diachi = request.getParameter("diaChi");
         String gioiTinh = request.getParameter("gioiTinh");
         String lop = request.getParameter("lop");
-        SinhVien sinhVien = new SinhVien(id, hoTen, diachi, gioiTinh, lop);
-        listSinhVien.add(sinhVien);
+//        SinhVien sinhVien = new SinhVien(id, hoTen, diachi, gioiTinh, lop);
+//        listSinhVien.add(sinhVien);
         response.sendRedirect("/sinh-vien/hien-thi");
     }
 }
