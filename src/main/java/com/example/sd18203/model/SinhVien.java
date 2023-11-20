@@ -16,6 +16,11 @@ public class SinhVien {
 
     @Id
     @Column(name = "id")
+    //    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(
+//            name = "UUID",
+//            strategy = "org.hibernate.id.UUIDGenerator"
+//    )
     private String id;
 
     @Column(name = "ten")
