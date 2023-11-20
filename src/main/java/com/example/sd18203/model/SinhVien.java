@@ -21,7 +21,7 @@ public class SinhVien {
 //            name = "UUID",
 //            strategy = "org.hibernate.id.UUIDGenerator"
 //    )
-    private String id;
+    private Integer id;
 
     @Column(name = "ten")
     private String ten;
