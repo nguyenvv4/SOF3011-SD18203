@@ -3,6 +3,7 @@ package com.example.sd18203.repository;
 import com.example.sd18203.model.SinhVien;
 import com.example.sd18203.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 
@@ -19,5 +20,17 @@ public class SinhVienRepository {
         return list;
     }
 
+
+    public void addNew(SinhVien sinhVien) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(sinhVien);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
 
 }

@@ -21,6 +21,7 @@ public class SinhVien {
 //            name = "UUID",
 //            strategy = "org.hibernate.id.UUIDGenerator"
 //    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "ten")

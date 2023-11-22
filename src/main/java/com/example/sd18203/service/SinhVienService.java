@@ -8,8 +8,13 @@ import java.util.ArrayList;
 public class SinhVienService {
 
     SinhVienRepository sinhVienRepository = new SinhVienRepository();
+
     // call repo
-    public ArrayList<SinhVien> getList(){
+    public ArrayList<SinhVien> getList() {
         return sinhVienRepository.getList();
+    }
+
+    public void addNew(SinhVien sinhVien) {
+        sinhVienRepository.addNew(sinhVien);
     }
 }

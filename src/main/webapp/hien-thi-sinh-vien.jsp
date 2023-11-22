@@ -42,7 +42,7 @@
         <label for="disabledSelect" class="form-label">Lớp</label>
         <select id="disabledSelect" class="form-select" name="lop">
             <c:forEach var="i" items="${lop}">
-                <option value="${i}">${i}</option>
+                <option value="${i.id}">${i.ten}</option>
             </c:forEach>
         </select>
     </div>

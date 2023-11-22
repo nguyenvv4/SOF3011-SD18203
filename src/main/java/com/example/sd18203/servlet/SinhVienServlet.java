@@ -1,6 +1,8 @@
 package com.example.sd18203.servlet;
 
+import com.example.sd18203.model.Lop;
 import com.example.sd18203.model.SinhVien;
+import com.example.sd18203.service.LopHocService;
 import com.example.sd18203.service.SinhVienService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -20,18 +22,8 @@ import java.util.ArrayList;
 public class SinhVienServlet extends HttpServlet {
     // call service => repo
     SinhVienService sinhVienService = new SinhVienService();
-    ArrayList<String> lop = new ArrayList<>();
 
-    public SinhVienServlet() {
-//        listSinhVien.add(new SinhVien("S1", "Nguyen Van a", "Ha Noi", "Nam", 1));
-//        listSinhVien.add(new SinhVien("S2", "Nguyen Van b", "Ha Noi", "Nam", "SD12346"));
-
-
-        lop.add("SD12345");
-        lop.add("SD12346");
-        lop.add("SD12347");
-        lop.add("SD12348");
-    }
+    LopHocService lopHocService = new LopHocService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,8 +36,8 @@ public class SinhVienServlet extends HttpServlet {
             detail(request, response);
         } else if (uri.contains("/delete")) {
             this.delete(request, response);
-        }else if (uri.contains("/search")){
-            this.search(request,response);
+        } else if (uri.contains("/search")) {
+            this.search(request, response);
         }
     }
 
@@ -59,7 +51,7 @@ public class SinhVienServlet extends HttpServlet {
 //            }
 //        }
         request.setAttribute("listSinhVien", list);
-        request.setAttribute("lop", lop);
+//        request.setAttribute("lop", lop);
         request.getRequestDispatcher("/hien-thi-sinh-vien.jsp").forward(request, response);
     }
 
@@ -80,7 +72,7 @@ public class SinhVienServlet extends HttpServlet {
 //        }
         System.out.println(sinhVienDetail.toString());
         request.setAttribute("sinhVien", sinhVienDetail);
-        request.setAttribute("lop", lop);
+//        request.setAttribute("lop", lop);
         request.getRequestDispatcher("/detail.jsp").forward(request, response);
     }
 
@@ -88,6 +80,7 @@ public class SinhVienServlet extends HttpServlet {
 
         ArrayList<SinhVien> listSinhVien = sinhVienService.getList();
         request.setAttribute("listSinhVien", listSinhVien);
+        ArrayList<Lop> lop = lopHocService.getList();
         request.setAttribute("lop", lop);
         request.getRequestDispatcher("/hien-thi-sinh-vien.jsp").forward(request, response);
     }
@@ -123,13 +116,19 @@ public class SinhVienServlet extends HttpServlet {
 
 
     private void addNew(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id = request.getParameter("id");
+
         String hoTen = request.getParameter("hoTen");
         String diachi = request.getParameter("diaChi");
         String gioiTinh = request.getParameter("gioiTinh");
-        String lop = request.getParameter("lop");
-//        SinhVien sinhVien = new SinhVien(id, hoTen, diachi, gioiTinh, lop);
-//        listSinhVien.add(sinhVien);
+        Integer idLop = Integer.parseInt(request.getParameter("lop"));
+        SinhVien sinhVien = new SinhVien();
+        sinhVien.setGioiTinh(gioiTinh);
+        sinhVien.setTen(hoTen);
+        sinhVien.setDiaChi(diachi);
+        Lop lop = new Lop();
+        lop.setId(idLop);
+        sinhVien.setLop(lop);
+        sinhVienService.addNew(sinhVien);
         response.sendRedirect("/sinh-vien/hien-thi");
     }
 }
