@@ -17,4 +17,12 @@ public class SinhVienService {
     public void addNew(SinhVien sinhVien) {
         sinhVienRepository.addNew(sinhVien);
     }
+
+    public SinhVien detail(Integer id){
+        return sinhVienRepository.getById(id);
+    }
+
+    public void update(SinhVien sinhVien) {
+        sinhVienRepository.update(sinhVien);
+    }
 }

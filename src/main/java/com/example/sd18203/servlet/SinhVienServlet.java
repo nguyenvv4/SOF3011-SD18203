@@ -63,16 +63,13 @@ public class SinhVienServlet extends HttpServlet {
     }
 
     private void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        SinhVien sinhVienDetail = new SinhVien();
-//        for (SinhVien sinhVien : listSinhVien) {
-//            if (sinhVien.getId().equals(id)) {
-//                sinhVienDetail = sinhVien;
-//            }
-//        }
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        SinhVien sinhVienDetail = sinhVienService.detail(id);
+
         System.out.println(sinhVienDetail.toString());
         request.setAttribute("sinhVien", sinhVienDetail);
-//        request.setAttribute("lop", lop);
+        ArrayList<Lop> lop = lopHocService.getList();
+        request.setAttribute("lop", lop);
         request.getRequestDispatcher("/detail.jsp").forward(request, response);
     }
 
@@ -97,20 +94,20 @@ public class SinhVienServlet extends HttpServlet {
     }
 
     private void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id = request.getParameter("id");
+        Integer id = Integer.parseInt(request.getParameter("id"));
         String hoTen = request.getParameter("hoTen");
         String diachi = request.getParameter("diaChi");
         String gioiTinh = request.getParameter("gioiTinh");
-        String lop = request.getParameter("lop");
-
-//        for (SinhVien sv : listSinhVien) {
-//            if (sv.getId().equals(id)) {
-//                sv.setTen(hoTen);
-////                sv.setLop(lop);
-//                sv.setDiaChi(diachi);
-//                sv.setGioiTinh(gioiTinh);
-//            }
-//        }
+        Integer idLop = Integer.parseInt(request.getParameter("lop"));
+        SinhVien sinhVien = new SinhVien();
+        sinhVien.setId(id);
+        sinhVien.setTen(hoTen);
+        sinhVien.setDiaChi(diachi);
+        Lop lop = new Lop();
+        lop.setId(idLop);
+        sinhVien.setLop(lop);
+        sinhVien.setGioiTinh(gioiTinh);
+        sinhVienService.update(sinhVien);
         response.sendRedirect("/sinh-vien/hien-thi");
     }
 

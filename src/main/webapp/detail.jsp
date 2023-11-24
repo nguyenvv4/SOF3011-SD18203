@@ -44,9 +44,9 @@
         <label for="disabledSelect" class="form-label">Lớp</label>
         <select id="disabledSelect" class="form-select" name="lop">
             <c:forEach var="i" items="${lop}">
-                <option value="${i}"
-                        <c:if test="${sinhVien.lop == i}">selected</c:if>
-                >${i}</option>
+                <option value="${i.id}"
+                        <c:if test="${sinhVien.lop == i.ten}">selected</c:if>
+                >${i.ten}</option>
             </c:forEach>
         </select>
     </div>
