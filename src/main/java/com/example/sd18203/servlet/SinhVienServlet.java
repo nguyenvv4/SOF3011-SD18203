@@ -1,14 +1,17 @@
 package com.example.sd18203.servlet;
 
 import com.example.sd18203.model.Lop;
+import com.example.sd18203.model.NewSinhVienViewModel;
 import com.example.sd18203.model.SinhVien;
 import com.example.sd18203.service.LopHocService;
 import com.example.sd18203.service.SinhVienService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.apache.commons.beanutils.BeanUtils;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 @WebServlet(name = "SinhVienServlet", value = {
@@ -114,18 +117,27 @@ public class SinhVienServlet extends HttpServlet {
 
     private void addNew(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String hoTen = request.getParameter("hoTen");
-        String diachi = request.getParameter("diaChi");
-        String gioiTinh = request.getParameter("gioiTinh");
-        Integer idLop = Integer.parseInt(request.getParameter("lop"));
+//        String hoTen = request.getParameter("ten");
+//        String diachi = request.getParameter("diaChi");
+//        String gioiTinh = request.getParameter("gioiTinh");
+//        Integer idLop = Integer.parseInt(request.getParameter("lop"));
         SinhVien sinhVien = new SinhVien();
-        sinhVien.setGioiTinh(gioiTinh);
-        sinhVien.setTen(hoTen);
-        sinhVien.setDiaChi(diachi);
-        Lop lop = new Lop();
-        lop.setId(idLop);
-        sinhVien.setLop(lop);
-        sinhVienService.addNew(sinhVien);
-        response.sendRedirect("/sinh-vien/hien-thi");
+//        sinhVien.setGioiTinh(gioiTinh);
+//        sinhVien.setTen(hoTen);
+//        sinhVien.setDiaChi(diachi);
+//        Lop lop = new Lop();
+//        lop.setId(idLop);
+//        sinhVien.setLop(lop);
+        NewSinhVienViewModel newSinhVienViewModel = new NewSinhVienViewModel();
+        try {
+            BeanUtils.populate(newSinhVienViewModel, request.getParameterMap());
+//            BeanUtils.copyProperties(sinhVien, newSinhVienViewModel);
+            sinhVienService.addNew(sinhVien);
+            response.sendRedirect("/sinh-vien/hien-thi");
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

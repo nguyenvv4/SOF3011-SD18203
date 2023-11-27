@@ -23,7 +23,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Ho Ten</label>
-        <input type="text" class="form-control" name="hoTen">
+        <input type="text" class="form-control" name="ten">
     </div>
     <div class="mb-3">
         <label class="form-label">Địa chỉ</label>
