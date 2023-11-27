@@ -59,9 +59,10 @@ public class SinhVienServlet extends HttpServlet {
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        int vitri = Integer.parseInt(request.getParameter("vitri"));
+        int id = Integer.parseInt(request.getParameter("id"));
 //        listSinhVien.remove(vitri);
-//        response.sendRedirect("/sinh-vien/hien-thi");
+        sinhVienService.delete(id);
+        response.sendRedirect("/sinh-vien/hien-thi");
 
     }
 

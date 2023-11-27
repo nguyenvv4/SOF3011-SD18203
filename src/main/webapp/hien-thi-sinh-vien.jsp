@@ -81,7 +81,7 @@
             <td>${i.diaChi}</td>
             <td>${i.gioiTinh}</td>
             <td>${i.lop.ten}</td>
-            <td><a href="/sinh-vien/delete?vitri=${sinhVien.index}" class="btn btn-danger">Xoá</a>
+            <td><a href="/sinh-vien/delete?id=${i.id}" class="btn btn-danger">Xoá</a>
                 <a href="/sinh-vien/detail?id=${i.id}" class="btn btn-primary">Detail</a>
             </td>
         </tr>

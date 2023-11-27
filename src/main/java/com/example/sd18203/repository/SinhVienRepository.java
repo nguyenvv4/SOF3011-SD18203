@@ -76,6 +76,18 @@ public class SinhVienRepository {
         return sinhVienViewModels;
     }
 
+    public void delete(SinhVien sinhVien){
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            session.delete(sinhVien);
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            transaction.rollback();
+        }
+    }
+
 
     public static void main(String[] args) {
         SinhVienRepository sinhVienRepository = new SinhVienRepository();

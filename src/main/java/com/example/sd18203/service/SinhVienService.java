@@ -18,11 +18,18 @@ public class SinhVienService {
         sinhVienRepository.addNew(sinhVien);
     }
 
-    public SinhVien detail(Integer id){
+    public SinhVien detail(Integer id) {
         return sinhVienRepository.getById(id);
     }
 
     public void update(SinhVien sinhVien) {
         sinhVienRepository.update(sinhVien);
+    }
+
+    public void delete(Integer id) {
+        SinhVien sinhVien = sinhVienRepository.getById(id);
+        if (sinhVien != null) {
+            sinhVienRepository.delete(sinhVien);
+        }
     }
 }
